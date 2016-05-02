@@ -47,3 +47,11 @@
     (make-color-escape 'none color)
     (string str) escape-color-reset))
   (accumulate string-append "" (map surround text)))
+
+(define (color-string foreground background str)
+  (string-append (make-color-escape foreground background)
+                 str
+                 escape-color-reset))
+
+(define (color-char foreground background char)
+  (color-string foreground background (string char)))
