@@ -1,9 +1,3 @@
-; returns color name, depending on the number.
-(define (get-color depth)
-  (define colors '#(red green blue yellow purple cyan))
-  (define no-colors (vector-length colors))
-  (vector-ref colors (remainder depth no-colors)))
-
 ; generates color data for a lisp list, where every set of parenthesis has their own color
 ; really hard to print out, see 'deep-print'
 (define (make-color-expr-list exp)
