@@ -1,4 +1,4 @@
-(define (rainbow-paren str)
+(define (display-rainbow-paren str)
   (define str-list (string->list str))
   (define (inner remaining depth escaped in-string)
     (if (not (null? remaining))
