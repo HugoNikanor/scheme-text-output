@@ -1,13 +1,11 @@
+; returns color name, depending on the number.
 (define (get-color depth)
   (define colors '#(red green blue yellow purple cyan))
   (define no-colors (vector-length colors))
   (vector-ref colors (remainder depth no-colors)))
 
-(define (has-inner-list? exp)
-  (if (list? exp)
-    (accumulate boolean/or #f (map list? exp))
-    #f))
-
+; generates color data for a lisp list, where every set of parenthesis has their own color
+; really hard to print out, see 'deep-print'
 (define (make-color-expr-list exp)
   (define (inner depth exp color-escape-return)
     (let ((current-color-escape (make-color-escape 'none (get-color depth))))
@@ -22,14 +20,8 @@
             color-escape-return))) 
   (inner 0 exp escape-color-reset))
 
-(define (deep-map func exp)
-  (map
-    (lambda (e)
-      (if (list? e)
-        (deep-map func e)
-        (func e)))
-    exp))
 
+; uses some weird tricks to print the lists produced by 'make-color-expr-list'
 (define (deep-print expr)
   (define (break-out-escapes full-expr)
     (define (inner done remaining)
